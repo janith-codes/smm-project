@@ -1,53 +1,104 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { CheckCircle2, TrendingUp } from "lucide-react";
 import { servicePackages } from "../data";
 import type { ServicePackage } from "../types";
 import { SectionHeader } from "./SectionHeader";
 
-function ServicePackageCard({ item }: { item: ServicePackage }) {
+function ServicePackageCard({ item, index }: { item: ServicePackage; index: number }) {
   return (
-    <article className="rounded-md border border-black/10 bg-[#faf8f2] p-6 shadow-sm">
-      <div className="flex items-center justify-between gap-4">
-        <p className="text-sm font-bold uppercase tracking-[0.16em] text-black/50">
-          {item.platform}
-        </p>
-        <span className="rounded-md bg-white px-3 py-1 text-xs font-bold text-[#9a3412]">
+    <motion.article 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-orange-500/10 bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all hover:border-orange-500/30 hover:shadow-[0_20px_40px_rgba(249,115,22,0.1)]"
+    >
+      {/* Decorative gradient background that appears on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      
+      <div className="relative flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-orange-600">
+            <TrendingUp className="h-4 w-4" />
+          </span>
+          <p className="text-xs font-bold uppercase tracking-widest text-gray-500">
+            {item.platform}
+          </p>
+        </div>
+        <span className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-orange-600">
           {item.tag}
         </span>
       </div>
-      <h3 className="mt-6 text-3xl font-black tracking-tight">{item.name}</h3>
-      <p className="mt-5 text-4xl font-black text-[#ff6b35]">{item.price}</p>
-      <p className="mt-3 text-sm font-medium text-black/58">
-        Estimated delivery: {item.delivery}
-      </p>
+      
+      <div className="relative mt-8 flex-grow">
+        <h3 className="text-2xl font-black tracking-tight text-gray-900">{item.name}</h3>
+        <div className="mt-4 flex items-baseline gap-2">
+          <p className="text-4xl font-black text-orange-500">{item.price}</p>
+        </div>
+        
+        <ul className="mt-8 flex flex-col gap-3">
+          <li className="flex items-center gap-3 text-sm font-medium text-gray-600">
+            <CheckCircle2 className="h-5 w-5 text-orange-400" />
+            <span>Estimated delivery: <strong className="text-gray-900">{item.delivery}</strong></span>
+          </li>
+          <li className="flex items-center gap-3 text-sm font-medium text-gray-600">
+            <CheckCircle2 className="h-5 w-5 text-orange-400" />
+            <span>High quality accounts</span>
+          </li>
+          <li className="flex items-center gap-3 text-sm font-medium text-gray-600">
+            <CheckCircle2 className="h-5 w-5 text-orange-400" />
+            <span>24/7 Support included</span>
+          </li>
+        </ul>
+      </div>
+      
       <a
         href="#order"
-        className="mt-7 inline-flex h-11 w-full items-center justify-center rounded-md bg-[#121212] text-sm font-bold text-white transition hover:bg-[#2a2a2a]"
+        className="relative mt-8 inline-flex h-14 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gray-900 px-8 text-sm font-bold text-white transition-all hover:bg-orange-500 hover:shadow-[0_0_40px_-10px_rgba(249,115,22,0.5)]"
       >
-        Select package
+        <span>Select Package</span>
       </a>
-    </article>
+    </motion.article>
   );
 }
 
 export function PackagesSection() {
   return (
-    <section id="packages" className="bg-white py-20">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <SectionHeader
-            eyebrow="Our services"
-            title="Cheapest and best SMM packages for all social platforms."
-          />
-          <p className="max-w-md text-base leading-7 text-black/62">
+    <section id="packages" className="relative overflow-hidden bg-[#faf9f6] py-24 lg:py-32">
+      {/* Background decoration */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[1000px] rounded-full bg-orange-300/10 mix-blend-multiply blur-[100px] filter" />
+      
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col justify-between gap-8 md:flex-row md:items-end"
+        >
+          <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-4 py-2 text-sm font-bold text-orange-600">
+              <span>Our Packages</span>
+            </div>
+            <h2 className="text-4xl font-black tracking-tight text-gray-900 sm:text-5xl">
+              Cheapest and best SMM packages for all platforms.
+            </h2>
+          </div>
+          <p className="max-w-md text-lg leading-relaxed text-gray-600">
             Get YouTube views, Instagram reel views, Facebook video views, TikTok
             engagement, and more from one trusted place with simple pricing.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {servicePackages.map((item) => (
+        <div className="mt-16 grid gap-6 md:grid-cols-3 lg:gap-8">
+          {servicePackages.map((item, index) => (
             <ServicePackageCard
               key={`${item.platform}-${item.name}`}
               item={item}
+              index={index}
             />
           ))}
         </div>
