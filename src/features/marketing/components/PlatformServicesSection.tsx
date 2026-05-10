@@ -1,5 +1,15 @@
+import Link from "next/link";
 import { platformServices } from "../data";
 import { SectionHeader } from "./SectionHeader";
+
+function serviceToPlatform(service: string): string {
+  const s = service.toLowerCase();
+  if (s.includes("youtube")) return "youtube";
+  if (s.includes("instagram")) return "instagram";
+  if (s.includes("facebook")) return "facebook";
+  if (s.includes("tiktok")) return "tiktok";
+  return "everything";
+}
 
 export function PlatformServicesSection() {
   return (
@@ -14,12 +24,13 @@ export function PlatformServicesSection() {
         />
         <div className="grid gap-3 sm:grid-cols-2">
           {platformServices.map((service) => (
-            <div
+            <Link
               key={service}
-              className="rounded-md border border-white/12 bg-white/[0.06] p-4 text-base font-semibold"
+              href={`/order?platform=${serviceToPlatform(service)}`}
+              className="rounded-md border border-white/12 bg-white/[0.06] p-4 text-base font-semibold transition hover:border-[#7dd3fc]/40 hover:bg-white/[0.1]"
             >
               {service}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

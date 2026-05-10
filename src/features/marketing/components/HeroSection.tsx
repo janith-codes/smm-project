@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Play, Sparkles, TrendingUp, Zap } from "lucide-react";
 import { heroStats } from "../data";
@@ -161,14 +162,14 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
-            <a
-              href="#order"
+            <Link
+              href="/order"
               className="group relative inline-flex h-14 items-center justify-center gap-2 overflow-hidden rounded-full bg-gray-900 px-8 text-base font-bold text-white transition-all hover:scale-105 hover:bg-gray-800 hover:shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)]"
             >
               <Zap className="h-5 w-5 text-orange-400" />
               <span>Start Growing Now</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
             
             <a
               href="#packages"

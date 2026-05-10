@@ -1,13 +1,3 @@
-import "../globals.css";
-
-export default function AdminLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
-  );
+export default function AdminGroupLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

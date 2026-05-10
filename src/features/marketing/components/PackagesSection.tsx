@@ -1,10 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle2, TrendingUp } from "lucide-react";
 import { servicePackages } from "../data";
 import type { ServicePackage } from "../types";
 import { SectionHeader } from "./SectionHeader";
+
+function platformQuery(platform: string): string {
+  const p = platform.toLowerCase();
+  if (p.includes("youtube")) return "youtube";
+  if (p.includes("instagram")) return "instagram";
+  if (p.includes("facebook")) return "facebook";
+  if (p.includes("tiktok")) return "tiktok";
+  return "everything";
+}
 
 function ServicePackageCard({ item, index }: { item: ServicePackage; index: number }) {
   return (
@@ -55,12 +65,12 @@ function ServicePackageCard({ item, index }: { item: ServicePackage; index: numb
         </ul>
       </div>
       
-      <a
-        href="#order"
+      <Link
+        href={`/order?platform=${platformQuery(item.platform)}`}
         className="relative mt-8 inline-flex h-14 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gray-900 px-8 text-sm font-bold text-white transition-all hover:bg-orange-500 hover:shadow-[0_0_40px_-10px_rgba(249,115,22,0.5)]"
       >
         <span>Select Package</span>
-      </a>
+      </Link>
     </motion.article>
   );
 }

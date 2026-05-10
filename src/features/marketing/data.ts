@@ -8,6 +8,7 @@ import type {
 
 export const navItems = [
   { label: "Packages", href: "#packages" },
+  { label: "Services", href: "/order" },
   { label: "Workflow", href: "#workflow" },
   { label: "FAQ", href: "#faq" },
 ] as const;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { orderServiceOptions, paymentMethodOptions } from "../data";
 import type { OrderOption } from "../types";
 import { SectionHeader } from "./SectionHeader";
@@ -89,10 +90,18 @@ export function OrderSection() {
         <SectionHeader
           eyebrow="Place your order"
           title="Fast ordering for views, followers, likes, and subscribers."
-          description="Select your package, add your public link, choose a payment method, and submit your contact number. Our team will confirm the details and start your order as soon as possible."
+          description="Use the full order page to browse every live service, filter by platform, and get an instant price estimate. You can still use the quick form here for a simple request."
           eyebrowClassName="text-[#00a676]"
         />
-        <OrderForm />
+        <div className="space-y-4">
+          <Link
+            href="/order"
+            className="flex h-14 w-full items-center justify-center rounded-md bg-gray-900 text-base font-black text-white transition hover:bg-[#ff6b35]"
+          >
+            Open full order page
+          </Link>
+          <OrderForm />
+        </div>
       </div>
     </section>
   );

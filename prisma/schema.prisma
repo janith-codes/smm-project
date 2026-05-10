@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model SmmProvider {
+  id          String    @id @default(cuid())
+  name        String
+  url         String
+  apiEndpoint String
+  apiKey      String
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  parentId  String?
+  parent    Category?  @relation("CategoryChildren", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryChildren")
+  products  Product[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Product {
+  id                String       @id @default(cuid())
+  name              String
+  description       String?
+  categoryId        String?
+  category          Category?    @relation(fields: [categoryId], references: [id])
+  providerId        String?
+  provider          SmmProvider? @relation(fields: [providerId], references: [id])
+  providerServiceId String?
+  providerRate      Float?
+  sellingRate       Float?
+  minOrder          Int?
+  maxOrder          Int?
+  serviceType       String?
+  isActive          Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
